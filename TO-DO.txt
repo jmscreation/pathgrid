@@ -1,0 +1,13 @@
+PathGrid Memory Updates:
+
+!!!!!!!!!!!!!!!!!!!!!Units cannot pass a row of units! Must solve!!!!!!!!!!!!!!!!!! %
+
+Units keep moving when at destination 1/2 %
+
+Units should move toward destination even if it's not reachable (limit pathfinder spread) %
+
+Units should not move to a cell that directs the unit back to its starting cell
+
+Implement a way to invert the PathFinder %
+
+Allow path finder algorithm to be used for both diagonal and non-diagonal cell approaches
