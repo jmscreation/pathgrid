@@ -5,8 +5,8 @@
 #include <ctime>
 #include <algorithm>
 
-#define GWIDTH      100
-#define GHEIGHT     50
+#define GWIDTH      40
+#define GHEIGHT     40
 
 using namespace std;
 
@@ -100,7 +100,8 @@ void printGrid() {
     for(int y=0; y<h; y++)
         for(int x=0; x<w; x++)
             updateCell(x,y);
-    setChar(32, 52, (string("NO Warn ")).data());
+    setChar(GWIDTH/2, GHEIGHT + 1, (string("                     ")).data());
+    setChar(GWIDTH/2, GHEIGHT + 2, (string("NO Warn ")).data());
 }
 
 void randomizeGrid() {
@@ -154,10 +155,10 @@ int main() {
                 o->x = gx;
                 o->y = gy;
                 if(o->collision()) {
-                    setChar(32, 52, (string("COLLISION WARNING: ") + to_string(o->id)).data());
+                    setChar(GWIDTH/2, GHEIGHT + 2, (string("COLLISION WARNING: ") + to_string(o->id)).data());
                 }
                 if(gx < 0 || gx >= grid.getWidth() || gy < 0 || gy >= grid.getHeight()) {
-                    setChar(32, 52, (string("OUT OF BOUNDS WARNING: ") + to_string(o->x) + "," + to_string(o->y)).data());
+                    setChar(GWIDTH/2, GHEIGHT + 2, (string("OUT OF BOUNDS WARNING: ") + to_string(o->x) + "," + to_string(o->y)).data());
                 }
                 o->stuck = false;
                 grid.removeDynamic(px,py);
@@ -176,6 +177,9 @@ int main() {
             //grid.removeStatic(Obj::gx - 1,Obj::gy - 1, 3, 3);
             finder->destination(Obj::gx, Obj::gy, toward); //, rand()%80);
             printGrid();
+            if(!toward){
+                setChar(GWIDTH/2, GHEIGHT + 1, (string("RUN AWAY")).data());
+            }
         }
     }
     return 0;
