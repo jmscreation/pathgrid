@@ -347,16 +347,16 @@ void PathGrid::setBits(uint64_t *grid,bool on,int x,int y,int w,int h) {
 
     uint64_t mask[2];
 
-    mask[0] = -1ull << xstart; // truncate start
+    mask[0] = UINT64_MAX << xstart; // truncate start
     if(xend) {
         if(x == _x)
-            mask[0] &= (-1ull >> (64-xend)); // truncate end
+            mask[0] &= (UINT64_MAX >> (64-xend)); // truncate end
         else
-            mask[1] = on ? (-1ull >> (64-xend)) : (-1ull << xend); // truncate end
+            mask[1] = on ? (UINT64_MAX >> (64-xend)) : (UINT64_MAX << xend); // truncate end
     } else {
         _x--;
         if(x < _x)
-            mask[1] = on ? -1ull : 0;
+            mask[1] = on ? UINT64_MAX : 0;
     }
 
     uint64_t *c;
@@ -369,7 +369,7 @@ void PathGrid::setBits(uint64_t *grid,bool on,int x,int y,int w,int h) {
                 else if(xx == _x)
                     c[xx] |= mask[1];
                 else
-                    c[xx] = -1ull;
+                    c[xx] = UINT64_MAX;
             }
         }
     } else {
@@ -405,16 +405,16 @@ bool PathGrid::rectHasOn(uint64_t *grid,int x,int y,int w,int h) {
 
     uint64_t mask[2];
 
-    mask[0] = -1ull << xstart; // truncate start
+    mask[0] = UINT64_MAX << xstart; // truncate start
     if(xend) {
         if(x == _x)
-            mask[0] &= (-1ull >> (64-xend)); // truncate end
+            mask[0] &= (UINT64_MAX >> (64-xend)); // truncate end
         else
-            mask[1] = (-1ull >> (64-xend)); // truncate end
+            mask[1] = (UINT64_MAX >> (64-xend)); // truncate end
     } else {
         _x--;
         if(x < _x)
-            mask[1] = -1ull;
+            mask[1] = UINT64_MAX;
     }
 
     uint64_t *c;
