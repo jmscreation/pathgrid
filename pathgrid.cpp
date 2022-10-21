@@ -197,7 +197,7 @@ PathGrid::Step PathGrid::PathFinder::nextStep(int x,int y,int& xStep,int& yStep,
             if(closest == std::end(stack)) break; // enclosed
 
             short _x,_y;
-            int p = all.size();
+            int p = static_cast<int>(all.size());
 
             all.push_back(*closest);
             stack.erase(closest);
